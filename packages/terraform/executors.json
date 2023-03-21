@@ -5,6 +5,16 @@
       "implementation": "./src/executors/build/executor",
       "schema": "./src/executors/build/schema.json",
       "description": "build executor"
+    },
+    "init": {
+      "implementation": "./src/executors/init/executor",
+      "schema": "./src/executors/init/schema.json",
+      "description": "init executor"
+    },
+    "fmt": {
+      "implementation": "./src/executors/fmt/executor",
+      "schema": "./src/executors/fmt/schema.json",
+      "description": "fmt executor"
     }
   }
 }

@@ -1,0 +1,10 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "version": 2,
+  "cli": "nx",
+  "title": "Fmt executor",
+  "description": "The terraform fmt executor is used to rewrite Terraform configuration files to a canonical format and style.",
+  "type": "object",
+  "properties": {},
+  "required": []
+}
