@@ -1,0 +1,24 @@
+{
+  "name": "terraform-e2e",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "e2e/terraform-e2e/src",
+  "targets": {
+    "e2e": {
+      "executor": "@nrwl/nx-plugin:e2e",
+      "options": {
+        "target": "terraform:build",
+        "jestConfig": "e2e/terraform-e2e/jest.config.ts"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["e2e/terraform-e2e/**/*.ts"]
+      }
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["terraform"]
+}

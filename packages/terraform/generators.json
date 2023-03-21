@@ -1,0 +1,12 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "name": "terraform",
+  "version": "0.0.1",
+  "generators": {
+    "terraform": {
+      "factory": "./src/generators/terraform/generator",
+      "schema": "./src/generators/terraform/schema.json",
+      "description": "terraform generator"
+    }
+  }
+}
