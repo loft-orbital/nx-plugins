@@ -3,10 +3,10 @@
   "name": "terraform",
   "version": "0.0.1",
   "generators": {
-    "terraform": {
-      "factory": "./src/generators/terraform/generator",
-      "schema": "./src/generators/terraform/schema.json",
-      "description": "terraform generator"
+    "lib": {
+      "factory": "./src/generators/lib/generator",
+      "schema": "./src/generators/lib/schema.json",
+      "description": "Generates a terraform library, a module not meant to be directly deployed."
     }
   }
 }

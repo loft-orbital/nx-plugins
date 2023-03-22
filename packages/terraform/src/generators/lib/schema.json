@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/schema",
   "cli": "nx",
-  "$id": "Terraform",
+  "$id": "Lib",
   "title": "",
   "type": "object",
   "properties": {
@@ -18,10 +18,14 @@
       "type": "string",
       "description": "Add tags to the project (used for linting)",
       "alias": "t"
-    },
+    }, 
     "directory": {
       "type": "string",
       "description": "A directory where the project is placed"
+    },
+    "header": {
+      "type": "string",
+      "description": "Header that will be added to terraform generated files."
     }
   },
   "required": ["name"]
