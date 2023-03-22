@@ -2,7 +2,7 @@ export interface PlanExecutorSchema {
   refresh?: boolean
   replace?: string
   target?: string
-  var: {[key: string]:string}
+  var?: {[key: string]:string}
   varFile?: string
   compactWarnings?: boolean
   detailedExitCode?: boolean

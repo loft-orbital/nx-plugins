@@ -1,11 +1,6 @@
 {
   "$schema": "http://json-schema.org/schema",
   "executors": {
-    "build": {
-      "implementation": "./src/executors/build/executor",
-      "schema": "./src/executors/build/schema.json",
-      "description": "build executor"
-    },
     "init": {
       "implementation": "./src/executors/init/executor",
       "schema": "./src/executors/init/schema.json",
@@ -25,6 +20,11 @@
       "implementation": "./src/executors/plan/executor",
       "schema": "./src/executors/plan/schema.json",
       "description": "plan executor"
+    },
+    "apply": {
+      "implementation": "./src/executors/apply/executor",
+      "schema": "./src/executors/apply/schema.json",
+      "description": "apply executor"
     }
   }
 }
