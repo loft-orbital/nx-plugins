@@ -9,16 +9,16 @@ import {
   updateNxJson,
 } from '@nrwl/devkit';
 import * as path from 'path';
-import { LibGeneratorSchema } from './schema';
+import { ProjectGeneratorSchema } from './schema';
 
-interface NormalizedSchema extends LibGeneratorSchema {
+interface NormalizedSchema extends ProjectGeneratorSchema {
   projectName: string;
   projectRoot: string;
   projectDirectory: string;
   parsedTags: string[];
 }
 
-function normalizeOptions(tree: Tree, options: LibGeneratorSchema): NormalizedSchema {
+function normalizeOptions(tree: Tree, options: ProjectGeneratorSchema): NormalizedSchema {
   const name = names(options.name).fileName;
   const projectDirectory = options.directory
     ? `${names(options.directory).fileName}/${name}`
@@ -48,13 +48,14 @@ function addFiles(tree: Tree, options: NormalizedSchema) {
     generateFiles(tree, path.join(__dirname, 'files'), options.projectRoot, templateOptions);
 }
 
-export default async function (tree: Tree, options: LibGeneratorSchema) {
+export default async function (tree: Tree, options: ProjectGeneratorSchema) {
   const normalizedOptions = normalizeOptions(tree, options);
   updateNxJson(
     tree,
     {
       namedInputs: {
         tfSource: ["{projectRoot}/src/*.tf"],
+        tfWD: ["{projectRoot}/src/.terraform"],
         tfPlan: ["{projectRoot}/src/tfplan"] 
       },
       targetDefaults: {
@@ -66,13 +67,19 @@ export default async function (tree: Tree, options: LibGeneratorSchema) {
         },
         validate: {
           inputs: ["tfSource", "tfWD"]
-        }
+        },
+        plan: {
+          inputs: ["tfSource", "tfWD"]
+        },
+        apply: {
+          inputs: ["tfSource", "tfWD", "tfPlan"]
+        },
       },
       tasksRunnerOptions: {
         default: {
           runner: "nx/tasks-runners/default",
           options: {
-            cacheableOperations: ["initialize"]
+            cacheableOperations: ["initialize", "plan", "apply"]
           }
         }
       }    
@@ -93,6 +100,16 @@ export default async function (tree: Tree, options: LibGeneratorSchema) {
             "{projectRoot}/src/.terraform.lock.hcl"
           ]
         },
+        plan: {
+          executor: "@loft-orbital/terraform:plan",
+          options: {
+            out: "tfplan"
+          },
+          outputs: [
+            "{projectRoot}/src/tfplan",
+          ],
+          dependsOn: ["initialize"]
+        },
         lint: {
           executor: "@loft-orbital/terraform:fmt",
           options: {
@@ -102,7 +119,14 @@ export default async function (tree: Tree, options: LibGeneratorSchema) {
         validate: {
           executor: "@loft-orbital/terraform:validate",
           dependsOn: ["initialize"]
-        }
+        },
+        apply: {
+          executor: "@loft-orbital/terraform:apply",
+          options: {
+            planFile: "tfplan"
+          },
+          dependsOn: ["plan"]
+        }     
       },
       tags: normalizedOptions.parsedTags,
     }
