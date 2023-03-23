@@ -6,7 +6,7 @@ export function runTfCommand(
   command: 'init' | 'plan' | 'fmt' | 'validate' | 'apply',
   params: string[],
 ): { success: boolean } {
-  const cwd = context.projectsConfigurations.projects[context.projectName].sourceRoot || process.cwd()
+  const cwd = context?.projectsConfigurations?.projects[context.projectName]?.sourceRoot || process.cwd()
 
   // Create the command to execute
   const execute = ['terraform', command, ...params].join(' ')

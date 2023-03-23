@@ -23,23 +23,32 @@ describe('terraform e2e', () => {
     runNxCommandAsync('reset');
   });
 
-  it('should create terraform', async () => {
+  it('should create lib', async () => {
     const project = uniq('terraform');
     await runNxCommandAsync(
-      `generate @loft-orbital/terraform:terraform ${project}`
+      `generate @loft-orbital/terraform:lib ${project}`
     );
-    const result = await runNxCommandAsync(`build ${project}`);
-    expect(result.stdout).toContain('Executor ran');
+    const result = await runNxCommandAsync(`initialize ${project}`);
+    expect(result.stdout).toContain('Terraform has been successfully initialized!');
+  }, 120000);
+  
+  it('should create project', async () => {
+    const project = uniq('terraform');
+    await runNxCommandAsync(
+      `generate @loft-orbital/terraform:project ${project}`
+    );
+    const result = await runNxCommandAsync(`initialize ${project}`);
+    expect(result.stdout).toContain('Terraform has been successfully initialized!');
   }, 120000);
 
   describe('--directory', () => {
     it('should create src in the specified directory', async () => {
       const project = uniq('terraform');
       await runNxCommandAsync(
-        `generate @loft-orbital/terraform:terraform ${project} --directory subdir`
+        `generate @loft-orbital/terraform:project ${project} --directory subdir`
       );
       expect(() =>
-        checkFilesExist(`libs/subdir/${project}/src/index.ts`)
+        checkFilesExist(`libs/subdir/${project}/src/main.tf`, `libs/subdir/${project}/README.md`)
       ).not.toThrow();
     }, 120000);
   });
@@ -49,7 +58,7 @@ describe('terraform e2e', () => {
       const projectName = uniq('terraform');
       ensureNxProject('@loft-orbital/terraform', 'dist/packages/terraform');
       await runNxCommandAsync(
-        `generate @loft-orbital/terraform:terraform ${projectName} --tags e2etag,e2ePackage`
+        `generate @loft-orbital/terraform:project ${projectName} --tags e2etag,e2ePackage`
       );
       const project = readJson(`libs/${projectName}/project.json`);
       expect(project.tags).toEqual(['e2etag', 'e2ePackage']);
