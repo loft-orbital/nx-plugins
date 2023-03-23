@@ -17,6 +17,6 @@ jobs:
       - uses: nrwl/nx-set-shas@v3
       - run: npm ci
       - run: npx nx run-many --target=build
-      - run: find ./dist/ -name package.json -execdir npm publish \;
+      - run: find ./dist/ -name package.json -execdir npm publish --access public \;
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
