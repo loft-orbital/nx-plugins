@@ -55,6 +55,7 @@ export default async function (tree: Tree, options: LibGeneratorSchema) {
     {
       namedInputs: {
         tfSource: ["{projectRoot}/src/*.tf"],
+        tfWD: ["{projectRoot}/src/.terraform"],
         tfPlan: ["{projectRoot}/src/tfplan"] 
       },
       targetDefaults: {
