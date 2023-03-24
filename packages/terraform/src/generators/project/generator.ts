@@ -90,7 +90,7 @@ export default async function (tree: Tree, options: ProjectGeneratorSchema) {
     normalizedOptions.projectName,
     {
       root: normalizedOptions.projectRoot,
-      projectType: 'library',
+      projectType: 'application',
       sourceRoot: `${normalizedOptions.projectRoot}/src`,
       targets: {
         initialize: {
