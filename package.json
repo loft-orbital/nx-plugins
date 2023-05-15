@@ -10,7 +10,7 @@
     "@nrwl/jest": "15.9.2",
     "@nrwl/js": "16.1.4",
     "@nrwl/linter": "15.9.2",
-    "@nrwl/nx-plugin": "^15.8.7",
+    "@nrwl/nx-plugin": "^16.1.4",
     "@nrwl/workspace": "16.1.4",
     "@swc-node/register": "^1.6.5",
     "@swc/cli": "~0.1.55",
