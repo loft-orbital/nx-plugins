@@ -7,7 +7,7 @@
   "devDependencies": {
     "@nrwl/devkit": "16.0.1",
     "@nrwl/eslint-plugin-nx": "16.1.4",
-    "@nrwl/jest": "15.9.2",
+    "@nrwl/jest": "16.5.0",
     "@nrwl/js": "16.1.4",
     "@nrwl/linter": "16.5.0",
     "@nrwl/nx-plugin": "^16.4.2",
